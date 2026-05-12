@@ -54,7 +54,7 @@ Ambas as bibliotecas são carregadas via CDN (cdnjs).
 Não há build, dependências de Node ou backend. Basta:
 
 ```bash
-git clone https://github.com/<seu-usuario>/parametros-de-compras.git
+git clone https://antonio-justier.github.io/GERADOR-DE-PARAMETROS-DE-COMPRAS-/
 cd parametros-de-compras
 ```
 
