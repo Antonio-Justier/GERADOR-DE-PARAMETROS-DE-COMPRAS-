@@ -177,7 +177,7 @@
   const rowsEl = document.getElementById("rows");
   const countEl = document.getElementById("count");
 
-  function makeRow() {
+  function makeRow(data) {
     const row = document.createElement("div");
     row.className = "row";
     row.innerHTML = `
@@ -190,6 +190,12 @@
         <button class="btn-icon btn-add" onclick="addRow()" title="Adicionar">${plusSvg}</button>
       </div>
     `;
+    if (data) {
+      row.querySelector(".produto").value = data.produto || "";
+      row.querySelector(".atual").value = data.atual || "";
+      row.querySelector(".comprar").value = data.comprar || "";
+      row.querySelector(".validade").value = data.validade || "";
+    }
     rowsEl.appendChild(row);
   }
 
@@ -205,6 +211,31 @@
     updateCount();
   }
 
+  function saveData() {
+    const rows = [];
+    rowsEl.querySelectorAll(".row").forEach(r => {
+      rows.push({
+        produto: r.querySelector(".produto").value,
+        atual: r.querySelector(".atual").value,
+        comprar: r.querySelector(".comprar").value,
+        validade: r.querySelector(".validade").value,
+      });
+    });
+    localStorage.setItem("compras_rows", JSON.stringify(rows));
+  }
+
+  function loadData() {
+    try {
+      const saved = localStorage.getItem("compras_rows");
+      if (!saved) return false;
+      const rows = JSON.parse(saved);
+      if (!rows || rows.length === 0) return false;
+      rowsEl.innerHTML = "";
+      rows.forEach(data => makeRow(data));
+      return true;
+    } catch(e) { return false; }
+  }
+
   function updateCount() {
     let n = 0;
     rowsEl.querySelectorAll(".row").forEach(r => {
@@ -212,6 +243,7 @@
       if ([...inputs].some(i => i.value.trim() !== "")) n++;
     });
     countEl.textContent = n;
+    saveData();
   }
 
   function collectData() {
@@ -308,7 +340,7 @@
     doc.save(`parametros-de-compras_${stamp}.pdf`);
   }
 
-  makeRow();
+  if (!loadData()) makeRow();
 </script>
 </body>
 </html>
