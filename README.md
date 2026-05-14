@@ -13,7 +13,7 @@ O resultado é um PDF pronto para ser impresso, assinado ou enviado por e-mail a
 - Geração de PDF em formato A4 com layout padronizado:
   - Logo da empresa no canto superior direito
   - Título `PARAMETROS DE COMPRAS` no topo
-  - Cabeçalho da tabela em cinza (`#898989`) com colunas `PRODUTO | QUANT. ATUAL | COMPRAR`
+  - Cabeçalho da tabela em cinza (`#898989`) com colunas `PRODUTO | QUANT. ATUAL | COMPRAR | DATA DE VALIDADE`
   - Apenas as linhas dos produtos efetivamente preenchidos, sem linhas em branco extras
 - Campos vazios em linhas preenchidas parcialmente são substituídos automaticamente por `-` no PDF.
 - Linhas totalmente em branco são ignoradas no documento final.
@@ -30,6 +30,7 @@ O resultado é um PDF pronto para ser impresso, assinado ou enviado por e-mail a
    - **Produto** — nome do item
    - **Quant. atual** — quantidade encontrada no estoque
    - **Comprar** — quantidade sugerida de compra
+   - **Data de validade** — data de validade do produto (exibida no PDF como `dd/mm/aaaa`)
 3. Use o botão **+** verde para adicionar novas linhas.
 4. Use o botão de **lixeira** vermelha para remover uma linha.
 5. Clique em **Gerar PDF** para baixar o documento.
@@ -140,6 +141,7 @@ const marginTop = 8;
 
 ## Roadmap / Ideias futuras
 
+- [x] Campo de data de validade por produto no PDF (formato `dd/mm/aaaa`)
 - [ ] Campo de data e nome do estoquista no cabeçalho do PDF
 - [ ] Campo de setor/loja
 - [ ] Importação de produtos a partir de CSV
@@ -151,6 +153,7 @@ const marginTop = 8;
 
 ## Histórico de mudanças
 
+- **v1.3** — Adicionada coluna **Data de Validade**: campo com seletor de data nativo em cada linha, exportada no PDF no formato `dd/mm/aaaa`.
 - **v1.2** — Cabeçalho do PDF e do site agora em cinza (`#898989`). Logo movida para o canto superior direito do PDF. Removidas as linhas em branco extras: o PDF contém apenas as linhas dos produtos preenchidos.
 - **v1.1** — Tema claro com logo da empresa no topo do site.
 - **v1.0** — Versão inicial: tema escuro, geração de PDF com cabeçalho laranja.
